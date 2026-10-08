@@ -1,0 +1,62 @@
+{
+  "call": { "customer": "Jonas Peeters", "durationSec": 79, "decisionMomentSec": 53 },
+  "segments": [
+    { "id": "E1", "speaker": "EVA", "start": 0, "end": 5, "text": "Hello, you're speaking with EVA, Telenet's digital assistant. How can I help you?" },
+    { "id": "C1", "speaker": "Customer", "start": 5, "end": 12, "graphPointSec": 12, "text": "Yes, my bill is way higher than normal. Over two hundred euros! I really don't understand this.",
+      "textEmotion": "Frustration, confusion", "voiceEmotions": [["Anger",72],["Confusion",58]], "events": [],
+      "textScore": 22, "voiceScore": 12, "evaScore": 14, "windowTextOnly": "red", "windowEva": "red",
+      "log": "Angry and confused about the bill. Red: service first, no offer." },
+    { "id": "E2", "speaker": "EVA", "start": 12, "end": 29, "text": "I understand. Let me check. Your bill is usually about 118 euros. This month there's 96 euros extra for mobile data used in Switzerland, on the fourteenth and fifteenth of September. Switzerland is outside the EU, so that data isn't included in your plan." },
+    { "id": "C2", "speaker": "Customer", "start": 30, "end": 39, "graphPointSec": 40, "text": "Switzerland... Ah. Right. The holiday. My daughter was streaming all weekend in the chalet.",
+      "textEmotion": "Neutral", "voiceEmotions": [["Amusement",61],["Relief",52]], "events": [{ "type": "Laughter", "at": 36 }],
+      "textScore": 45, "voiceScore": 64, "evaScore": 60, "windowTextOnly": "amber", "windowEva": "amber",
+      "log": "Voice relaxes, laughter starts. Amber: problem not yet confirmed as solved." },
+    { "id": "E3", "speaker": "EVA", "start": 40, "end": 45, "text": "So the amount is correct. Is it clear now where it comes from?" },
+    { "id": "C3", "speaker": "Customer", "start": 46, "end": 53, "graphPointSec": 53, "text": "Yes, it's clear. Still quite a lot of money for some data. We go there every year, so I'll have to watch out.",
+      "textEmotion": "Hesitation", "voiceEmotions": [["Relief",84],["Amusement",70]], "events": [{ "type": "Laughter", "at": 46 }],
+      "textScore": 38, "voiceScore": 88, "evaScore": 78, "windowTextOnly": "amber", "windowEva": "green", "problemSolved": true,
+      "chartCallout": "Words alone: 38%, no offer · Voice: 88%, relieved and laughing",
+      "log": "Words sound hesitant, but the voice is relieved and laughing. Problem solved + EVA score 78%: green." },
+    { "id": "E4", "speaker": "EVA", "start": 53, "end": 66, "text": "Since you travel there every year: our travel data option gives you data outside the EU at a fixed price, so this won't happen again. Shall I add it to your plan? You can switch it off anytime, free of charge.", "isOffer": true },
+    { "id": "C4", "speaker": "Customer", "start": 67, "end": 73, "graphPointSec": 73, "text": "Yes, please. Add it. I will definitely need it with my daughter streaming all the time.",
+      "textEmotion": "Interest", "voiceEmotions": [["Enthusiasm",78],["Satisfaction",70]], "events": [],
+      "textScore": 60, "voiceScore": 92, "evaScore": 86, "windowTextOnly": "amber", "windowEva": "green",
+      "log": "Customer explicitly accepts the offer. Sale executed." },
+    { "id": "E5", "speaker": "EVA", "start": 74, "end": 79, "text": "Done, it's active from today. Your confirmation is in the Telenet app. Have a nice day!", "isSale": true }
+  ],
+  "sale": { "at": 74, "product": "Travel data option (outside the EU)", "status": "Activated from today", "confirmation": "Confirmation sent to the Telenet app", "channel": "Live, by EVA (no advisor needed)" },
+  "outcome": {
+    "withoutEva": "Without EVA (text only): no offer made, a sale missed.",
+    "withEva": "With EVA (text + voice): problem solved, one relevant offer at the right moment, sale completed by the voicebot."
+  },
+  "emotionList": ["Anger","Frustration","Worry","Confusion","Hesitation","Neutral","Relief","Amusement","Satisfaction","Interest","Enthusiasm"],
+  "customerData": [
+    { "source": "CRM", "field": "Products", "value": "Internet + TV + 2 mobile lines", "usedFor": "Context" },
+    { "source": "CRM", "field": "Mobile plan", "value": "EU roaming included; no data outside the EU", "usedFor": "Gap the offer closes", "key": true },
+    { "source": "CRM", "field": "Marketing consent", "value": "Yes (app and phone)", "usedFor": "Allowed to offer", "key": true },
+    { "source": "Billing", "field": "Average monthly bill (12 months)", "value": "€118.20", "usedFor": "Explains the high bill" },
+    { "source": "Billing", "field": "October 2026 bill", "value": "€214.60", "usedFor": "Bill in question" },
+    { "source": "Billing", "field": "Data outside the EU, line 2", "value": "Switzerland, 14–15 Sep 2026: €96.40", "usedFor": "Cause of the high bill", "key": true },
+    { "source": "Billing", "field": "Earlier data outside the EU, line 2", "value": "Switzerland, Sep 2025: €41.20", "usedFor": "Pattern: same place, same month", "key": true },
+    { "source": "Billing", "field": "Payment history", "value": "Always on time", "usedFor": "No risk flag" },
+    { "source": "Network usage", "field": "Roaming data, line 2, Sep 2026", "value": "6.767 GB in 2 days (Switzerland)", "usedFor": "Confirms streaming abroad" },
+    { "source": "tNPS", "field": "Last score", "value": "7 (March 2026)", "usedFor": "Not a detractor", "key": true },
+    { "source": "Sales history", "field": "Travel option bought before", "value": "Never", "usedFor": "Offer is new", "key": true },
+    { "source": "Sales history", "field": "Offers declined, last 6 months", "value": "None", "usedFor": "Not offer-fatigued", "key": true },
+    { "source": "Case history", "field": "Open complaints / repeat contacts", "value": "None; first call about this bill", "usedFor": "No service blocker", "key": true }
+  ],
+  "nextBestAction": {
+    "top": { "name": "Travel data option (outside the EU)", "propensity": 0.78, "type": "Upsell",
+      "reasons": ["Data used outside the EU in 2 of the last 13 months", "Same country (Switzerland), same month (September)", "Current plan has no data outside the EU", "Directly related to the reason for this call"] },
+    "other": [{ "name": "Switch to e-billing", "propensity": 0.41, "type": "Service (non-sales)" }]
+  },
+  "decisionChecks": [
+    { "label": "Problem solved", "detail": "Customer confirmed: \"Yes, it's clear\"" },
+    { "label": "Sentiment", "detail": "EVA score 78% > 70% (text only: 38%, which means amber, no offer)" },
+    { "label": "Emotions", "detail": "Relief 84%, amusement 70%, laughter detected" },
+    { "label": "Guardrails", "detail": "0 misunderstandings · no open complaint · tNPS 7 · consent yes · no declines in 6 months" },
+    { "label": "Next best action", "detail": "Travel data option, propensity 0.78, linked to the call topic" },
+    { "label": "Decision", "detail": "GREEN: one live offer, at the right moment" }
+  ],
+  "rules": "GREEN  = problem_solved AND eva_score > 70% AND guardrails_ok  → one live offer from next best action\nAMBER  = 30% ≤ eva_score ≤ 70% OR (eva_score > 70% AND NOT problem_solved)  → no live offer; digital offer after 48–72 h if no new contact\nRED    = eva_score < 30%  → no offer; focus on solving the problem\nHANDOVER = RED still after EVA's explanation OR recognition_failures ≥ 2  → advisor with call summary, no offer\nguardrails_ok = recognition_failures < 2 AND no_open_complaint AND last_tNPS ≥ 7 AND marketing_consent AND no_decline_6m\neva_score = 0.2 × text_score + 0.8 × voice_score   (illustrative weights)"
+}
